@@ -41,7 +41,7 @@ def create_app(config_class=Config):
     socket_log = logger if strtobool(str(app.config["SOCKET_LOG"])) == 1 else False
     db.init_app(app)
     migrate.init_app(app, db, compare_type=True, ping_interval=60)
-    socketio.init_app(app, json=json, engineio_logger=socket_log, logger=socket_log, async_mode='gevent')
+    socketio.init_app(app, json=json, engineio_logger=socket_log, logger=socket_log, async_mode='gevent', cors_allowed_origins="*", debug=True)
     app.register_blueprint(bp_overview)
     app.register_blueprint(bp_settings)
     if app.config.get('INIT_DB') == True:

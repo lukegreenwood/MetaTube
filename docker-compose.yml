@@ -16,7 +16,7 @@ services:
       - LOG_LEVEL=10
       # - INIT_DB=false
     volumes:
-      - metatube_downloads:/downloads:rw
+      - vault_music_staging:/downloads:rw
       - metatube_db:/database:rw
       - metatube_migrations:/config/migrations
     # Necessary for VAAPI to work
@@ -28,3 +28,5 @@ volumes:
   metatube_downloads:
   metatube_db:
   metatube_migrations:
+  vault_music_staging:
+    external: true 

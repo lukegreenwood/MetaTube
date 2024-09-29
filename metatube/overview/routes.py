@@ -95,7 +95,7 @@ def search(query):
 def filename(data):
     info_dict = json.loads(data["info_dict"])
     filename = yt.verifytemplate(data["template"], info_dict, False)
-    sockets.filenametemplate(filename)
+    sockets.filenametemplate(filename, data['url'])
 
 @socketio.on('searchmetadata')
 def searchmetadata(data):

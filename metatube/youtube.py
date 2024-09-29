@@ -51,6 +51,7 @@ class YouTube:
         logger.info('Searching YouTube for \'%s\'', query)
         search = VideosSearch(query)
         result = search.result()
+        result['query'] = query
         sockets.youtubesearch(result)
         
     @staticmethod
@@ -99,7 +100,7 @@ class YouTube:
         if d['status'] == 'processing':
             sockets.postprocessing(d['postprocessor'])
         elif d['status'] == 'finished':
-            sockets.finished_postprocessor(d['postprocessor'], d['info_dict']['filepath'])
+            sockets.finished_postprocessor(d['postprocessor'], d['info_dict']['filepath'], d['info_dict']['webpage_url'], d['info_dict']['id'])
     
     @staticmethod
     def get_options(ext, output_folder, type, output_format, bitrate, skipfragments, proxy_data, ffmpeg, hw_transcoding, vaapi_device, width, height, verbose):
@@ -229,7 +230,7 @@ class YouTube:
                 elif d['status'] == 'processing':
                     sockets.postprocessing(d['postprocessor'])
                 elif d['status'] == 'finished':
-                        sockets.finished_download()
+                        sockets.finished_download(url)
             except Empty:
                 pass
             finally:
@@ -252,4 +253,4 @@ class YouTube:
         metadatatemplate = env.get_template('metadataform.html')
         downloadform = downloadtemplate.render(templates=templates, segments=segments, default=defaulttemplate)
         metadataform = metadatatemplate.render(metadata_sources=metadata_sources)
-        sockets.youtuberesults(video, downloadform, metadataform)
+        sockets.youtuberesults(video, downloadform, metadataform, segments)

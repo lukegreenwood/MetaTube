@@ -18,11 +18,11 @@ def overview(message):
 def musicbrainzresults(data):
     socketio.emit('mbp_response', data)
     
-def youtuberesults(data, downloadform, metadataform):
-    socketio.emit('ytdl_response', (data, downloadform, metadataform))
+def youtuberesults(data, downloadform, metadataform, segments):
+    socketio.emit('ytdl_response', (data, downloadform, metadataform, segments))
     
-def filenametemplate(data):
-    socketio.emit('ytdl_template', data)
+def filenametemplate(data, id):
+    socketio.emit('ytdl_template',(data, id))
     
 def editmetadata(data):
     socketio.emit('edit_metadata', data)
@@ -70,14 +70,16 @@ def downloadprogress(downloaded_bytes, total_bytes):
 def postprocessing(postprocessor):
     socketio.emit('postprocessing', {'postprocessor': postprocessor})
     
-def finished_postprocessor(postprocessor, filepath):
+def finished_postprocessor(postprocessor, filepath, url, id):
     socketio.emit('finished_postprocessor', {
         'postprocessor': postprocessor,
-        'filepath': filepath
+        'filepath': filepath,
+        'url': url,
+        'id': id
     })
     
-def finished_download():
-    socketio.emit('finished_download')
+def finished_download(url):
+    socketio.emit('finished_download', {'url': url})
     
 def finished_metadata(response):
     socketio.emit('finished_metadata', {'status':'finished_metadata', 'data': response})
