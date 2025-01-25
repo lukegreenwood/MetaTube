@@ -19,3 +19,4 @@ spotipy==2.23.0
 urllib3==2.2.2
 deezer-python==6.1.1
 lyricsgenius==3.0.1
+httpx==0.27.2
