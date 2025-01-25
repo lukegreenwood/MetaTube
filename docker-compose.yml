@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   metatube:
@@ -29,4 +29,4 @@ volumes:
   metatube_db:
   metatube_migrations:
   vault_music_staging:
-    external: true 
+    # external: true
