@@ -8,7 +8,7 @@ services:
       dockerfile: ./Dockerfile
     restart: unless-stopped
     ports:
-      - 5000:5000
+      - 5001:5000
     security_opt:
       - no-new-privileges:true
     environment:
@@ -16,7 +16,8 @@ services:
       - LOG_LEVEL=10
       # - INIT_DB=false
     volumes:
-      - vault_music_staging:/downloads:rw
+      # - vault_music_staging:/downloads:rw
+      - ./metatube_downloads:/downloads:rw
       - metatube_db:/database:rw
       - metatube_migrations:/config/migrations
     # Necessary for VAAPI to work
@@ -29,4 +30,4 @@ volumes:
   metatube_db:
   metatube_migrations:
   vault_music_staging:
-    # external: true
+     #external: true

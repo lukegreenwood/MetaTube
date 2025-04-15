@@ -600,7 +600,7 @@ class MetaData:
     @staticmethod
     def AVI(filename):
         pass
-
+    
     @staticmethod
     def modeToDepth():
         return {
